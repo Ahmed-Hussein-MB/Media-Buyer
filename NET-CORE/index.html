@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title-[#0a4975]">NET CORE - Interactive Digital Marketing Strategy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Chart.js for Interactive Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Cairo Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Cairo', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              main: '#0a4975',
+              dark: '#083e64',
+              cyan: '#26c9da',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Cairo', sans-serif;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #0a4975;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-800 antialiased selection:bg-[#0a4975] selection:text-white">
+
+  <!-- Progress Bar -->
+  <div id="scrollProgress" class="fixed top-0 left-0 right-0 h-1 bg-[#0a4975] z-50 transition-all duration-150" style="width: 0%;"></div>
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="scrollToId('hero')">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+  <img 
+    src="./1.png"
+    alt="NC Logo"
+    class="w-full h-full object-contain"
+  >
+</div>
+        <div>
+          <div class="text-xl font-extrabold tracking-wider text-[#0a4975]">NET CORE</div>
+          <div class="text-xs text-slate-500 font-medium tracking-tight">Information Technology</div>
+        </div>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-bold text-slate-600">
+        <a href="#about" class="hover:text-[#0a4975] transition">عن المشروع</a>
+        <a href="#objectives" class="hover:text-[#0a4975] transition">الأهداف</a>
+        <a href="#audience" class="hover:text-[#0a4975] transition">الجمهور</a>
+        <a href="#roadmap" class="hover:text-[#0a4975] transition">خارطة الطريق</a>
+        <a href="#content" class="hover:text-[#0a4975] transition">المحتوى</a>
+        <a href="#budget" class="hover:text-[#0a4975] transition">الميزانية</a>
+        <a href="#kpis" class="hover:text-[#0a4975] transition">مؤشرات الأداء</a>
+        <a href="#financial" class="hover:text-[#0a4975] transition">العرض المالي</a>
+      </nav>
+
+      <!-- Action & Personal Link -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="https://www.ahmedhusseinmb.com/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-600 hover:text-[#0a4975] px-3 py-1.5 rounded-lg border border-slate-200 hover:border-[#0a4975] transition bg-slate-50">
+          <span>إعداد: <strong class="text-[#0a4975]">Ahmed Hussein</strong></span>
+        </a>
+        <button onclick="scrollToId('financial')" class="bg-[#0a4975] hover:bg-[#083e64] text-white font-bold text-sm px-4 py-2 rounded-lg transition shadow-md">
+          العرض المالي
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3">
+      <div class="pb-2 border-b border-slate-100 text-xs text-slate-600">
+        إعداد الاستراتيجية: <a href="https://www.ahmedhusseinmb.com/" target="_blank" class="text-[#0a4975] font-bold">Ahmed Hussein</a>
+      </div>
+      <div class="grid grid-cols-2 gap-2 text-sm font-medium">
+        <a href="#about" onclick="toggleMobileMenu()" class="py-2 px-3 rounded hover:bg-slate-50">عن المشروع</a>
+        <a href="#objectives" onclick="toggleMobileMenu()" class="py-2 px-3 rounded hover:bg-slate-50">الأهداف</a>
+        <a href="#audience" onclick="toggleMobileMenu()" class="py-2 px-3 rounded hover:bg-slate-50">الجمهور</a>
+        <a href="#roadmap" onclick="toggleMobileMenu()" class="py-2 px-3 rounded hover:bg-slate-50">خارطة الطريق</a>
+        <a href="#content" onclick="toggleMobileMenu()" class="py-2 px-3 rounded hover:bg-slate-50">المحتوى</a>
+        <a href="#budget" onclick="toggleMobileMenu()" class="py-2 px-3 rounded hover:bg-slate-50">الميزانية</a>
+        <a href="#kpis" onclick="toggleMobileMenu()" class="py-2 px-3 rounded hover:bg-slate-50">مؤشرات الأداء</a>
+        <a href="#financial" onclick="toggleMobileMenu()" class="py-2 px-3 rounded hover:bg-slate-50">العرض المالي</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="py-20 bg-gradient-to-b from-slate-50 via-white to-slate-50 border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-[#0a4975] text-xs font-bold mb-6">
+        Interactive Strategy Presentation • Business Proposal
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-black text-[#0a4975] tracking-tight mb-3">NET CORE</h1>
+      <p class="text-lg sm:text-xl text-slate-600 font-semibold mb-6">Information Technology • <span class="text-[#0a4975]">Your Technology Partner.</span></p>
+
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-6 leading-relaxed max-w-4xl mx-auto">
+        الخطة التسويقية والاستراتيجية الرقمية
+      </h2>
+
+      <p class="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+        خارطة طريق لتأسيس العلامة التجارية، بناء الوعي، تعزيز الثقة، والوصول إلى العملاء المحتملين خلال أول 3 أشهر.
+      </p>
+
+      <!-- Key Metrics -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-10">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#0a4975] mb-1">3 أشهر</div>
+          <div class="text-xs sm:text-sm font-bold text-slate-800">مدة الخطة</div>
+          <div class="text-[11px] text-slate-500">تأسيس ونمو</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#0a4975] mb-1">منصتان</div>
+          <div class="text-xs sm:text-sm font-bold text-slate-800">المنصات</div>
+          <div class="text-[11px] text-slate-500">Facebook & Instagram</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#0a4975] mb-1">15 قطعة</div>
+          <div class="text-xs sm:text-sm font-bold text-slate-800">المحتوى الشهري</div>
+          <div class="text-[11px] text-slate-500">تصميمات وفيديوهات</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+          <div class="text-2xl sm:text-3xl font-extrabold text-[#0a4975] mb-1">3,500 ج.م</div>
+          <div class="text-xs sm:text-sm font-bold text-slate-800">أتعاب الإدارة</div>
+          <div class="text-[11px] text-slate-500">شهرياً</div>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button onclick="scrollToId('about')" class="w-full sm:w-auto bg-[#0a4975] hover:bg-[#083e64] text-white font-extrabold text-base px-8 py-3.5 rounded-xl transition shadow-md">
+          استكشف الخطة
+        </button>
+        <button onclick="scrollToId('financial')" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-[#0a4975] font-extrabold text-base px-8 py-3.5 rounded-xl transition">
+          العرض المالي
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 5: ABOUT -->
+  <section id="about" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-3">من نحن؟ وما الذي نعمل على بنائه؟</h2>
+        <div class="w-16 h-1 bg-[#0a4975] mx-auto rounded-full"></div>
+        <p class="mt-4 text-slate-600 max-w-3xl mx-auto">
+          تعتبر <strong class="text-[#0a4975]">NET CORE</strong> علامة تجارية متخصصة في تقديم حلول وخدمات تكنولوجيا المعلومات للأفراد والشركات.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <span class="text-xs font-black text-[#0a4975] bg-blue-100/60 px-2.5 py-1 rounded-md mb-3 inline-block">01</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">الدعم الفني وصيانة الأجهزة</h3>
+          <p class="text-xs text-slate-600">صيانة أجهزة الكمبيوتر واللاب توب وإصلاح الأعطال.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <span class="text-xs font-black text-[#0a4975] bg-blue-100/60 px-2.5 py-1 rounded-md mb-3 inline-block">02</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">إعداد وصيانة الشبكات</h3>
+          <p class="text-xs text-slate-600">تجهيز الشبكات وحل المشكلات التقنية وتطوير البنية.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <span class="text-xs font-black text-[#0a4975] bg-blue-100/60 px-2.5 py-1 rounded-md mb-3 inline-block">03</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">تثبيت الأنظمة والبرامج</h3>
+          <p class="text-xs text-slate-600">خدمات أنظمة التشغيل وحلول إدارة البيانات والتخزين.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <span class="text-xs font-black text-[#0a4975] bg-blue-100/60 px-2.5 py-1 rounded-md mb-3 inline-block">04</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">حلول IT للشركات</h3>
+          <p class="text-xs text-slate-600">تقديم الدعم التقني والتكنولوجي للمشروعات والشركات.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <span class="text-xs font-black text-[#0a4975] bg-blue-100/60 px-2.5 py-1 rounded-md mb-3 inline-block">05</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">إدارة السيرفرات الداخلية</h3>
+          <p class="text-xs text-slate-600">إنشاء وإدارة السيرفرات وضمان كفاءتها واستقرارها.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <span class="text-xs font-black text-[#0a4975] bg-blue-100/60 px-2.5 py-1 rounded-md mb-3 inline-block">06</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">ربط الفروع وتقنيات VPN</h3>
+          <p class="text-xs text-slate-600">توصيل شبكات الفروع المتباعدة بأمان وسرعة.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:col-span-2 lg:col-span-1">
+          <span class="text-xs font-black text-[#0a4975] bg-blue-100/60 px-2.5 py-1 rounded-md mb-3 inline-block">07</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">النسخ الاحتياطي وحماية البيانات</h3>
+          <p class="text-xs text-slate-600">تأمين البيانات ضد الفقدان واستعادتها بفعالية.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:col-span-2 lg:col-span-2">
+          <span class="text-xs font-black text-[#0a4975] bg-blue-100/60 px-2.5 py-1 rounded-md mb-3 inline-block">08</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">البنية التحتية التكنولوجية للشركات</h3>
+          <p class="text-xs text-slate-600">تأسيس وتجهيز بنية تحتية تكنولوجية متكاملة تدعم نمو الأعمال وسرعة الإنجاز.</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 text-white rounded-2xl p-8 shadow-xl">
+        <h3 class="text-xl font-bold text-[#26c9da] mb-3">الرؤية التسويقية للمشروع</h3>
+        <p class="text-base leading-relaxed text-slate-200">
+          بناء علامة تجارية قوية وموثوقة في مجال تكنولوجيا المعلومات، وتحويل <strong class="text-[#26c9da]">NET CORE</strong> إلى اسم معروف ومصدر ثقة لدى أصحاب الشركات والمشروعات الصغيرة والناشئة، باعتبارها شريكًا تقنيًا قادرًا على توفير الحلول التي تساعدهم على إدارة أعمالهم بكفاءة وأمان.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 6: OBJECTIVES -->
+  <section id="objectives" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-3">ما الذي نريد تحقيقه خلال أول 3 أشهر؟</h2>
+        <div class="w-16 h-1 bg-[#0a4975] mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <span class="text-3xl font-black text-[#0a4975]/20 block mb-2">01</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Brand Awareness</h3>
+          <p class="text-xs text-slate-600">زيادة الوعي بالعلامة التجارية في السوق.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <span class="text-3xl font-black text-[#0a4975]/20 block mb-2">02</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Audience Growth</h3>
+          <p class="text-xs text-slate-600">بناء قاعدة متابعين حقيقية ومهتمة بـ IT.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <span class="text-3xl font-black text-[#0a4975]/20 block mb-2">03</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Service Awareness</h3>
+          <p class="text-xs text-slate-600">تعريف الجمهور بخدمات وحلول الشركة.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <span class="text-3xl font-black text-[#0a4975]/20 block mb-2">04</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Brand Positioning</h3>
+          <p class="text-xs text-slate-600">تقديم الشركة كجهة متخصصة وموثوقة.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <span class="text-3xl font-black text-[#0a4975]/20 block mb-2">05</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Trust Building</h3>
+          <p class="text-xs text-slate-600">بناء الثقة عبر المحتوى التعليمي والخبرات.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <span class="text-3xl font-black text-[#0a4975]/20 block mb-2">06</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Engagement</h3>
+          <p class="text-xs text-slate-600">زيادة التفاعل والمشاركة مع المحتوى.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <span class="text-3xl font-black text-[#0a4975]/20 block mb-2">07</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Audience Database</h3>
+          <p class="text-xs text-slate-600">تكوين قاعدة بيانات المهتمين بالخدمات.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <span class="text-3xl font-black text-[#0a4975]/20 block mb-2">08</span>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Lead Generation</h3>
+          <p class="text-xs text-slate-600">استهداف الشركات وتحويلهم لفرص تعاقد.</p>
+        </div>
+      </div>
+
+      <div class="bg-white border-r-4 border-r-[#0a4975] border border-slate-200 rounded-xl p-6 shadow-sm">
+        <p class="text-sm sm:text-base text-slate-800 font-semibold leading-relaxed">
+          📌 <span class="text-[#0a4975]">ملاحظة هامة:</span> "النجاح في أول 3 أشهر يُقاس ببناء الحضور الرقمي، وجودة الجمهور، ومستوى الاهتمام والثقة، وليس بحجم المبيعات فقط."
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 7: AUDIENCE & PLATFORMS -->
+  <section id="audience" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-3">الجمهور المستهدف والمنصات</h2>
+        <div class="w-16 h-1 bg-[#0a4975] mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+        
+        <!-- B2B -->
+        <div class="lg:col-span-2 bg-slate-50 border-2 border-[#0a4975] rounded-2xl p-8 relative">
+          <span class="absolute top-4 left-4 bg-[#0a4975] text-white text-xs font-bold px-3 py-1 rounded-full">التركيز الأبرز (B2B)</span>
+          <h3 class="text-xl sm:text-2xl font-extrabold text-[#0a4975] mb-6">الجمهور الأساسي: الشركات والمشروعات (B2B)</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700">
+            <div class="bg-white p-3 rounded-xl border border-slate-200">• أصحاب الشركات الصغيرة والمتوسطة</div>
+            <div class="bg-white p-3 rounded-xl border border-slate-200">• أصحاب المشروعات الناشئة (Startups)</div>
+            <div class="bg-white p-3 rounded-xl border border-slate-200">• رواد الأعمال وأصحاب الأنشطة التجارية</div>
+            <div class="bg-white p-3 rounded-xl border border-slate-200">• مدراء الشركات والمسؤولون الإداريون</div>
+            <div class="bg-white p-3 rounded-xl border border-slate-200">• المسؤولون عن تكنولوجيا المعلومات بالشركات</div>
+            <div class="bg-white p-3 rounded-xl border border-slate-200">• المكاتب والشركات التي تحتاج صيانة دورية</div>
+            <div class="bg-white p-3 rounded-xl border border-slate-200">• الشركات متعددة الفروع لربط الشبكات</div>
+            <div class="bg-white p-3 rounded-xl border border-slate-200">• الشركات التي تحتاج حماية ونخ احتياطي</div>
+          </div>
+        </div>
+
+        <!-- B2C -->
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-slate-900 mb-6">الجمهور الثانوي (B2C)</h3>
+            <div class="space-y-3 text-xs sm:text-sm text-slate-700">
+              <div class="bg-white p-3 rounded-xl border border-slate-200">• المهتمون بالتكنولوجيا والكمبيوتر</div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200">• الأفراد الذين يحتاجون صيانة ودعم تقني</div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200">• أصحاب الأجهزة والشبكات المنزلية</div>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 bg-white rounded-xl border border-slate-200 text-xs text-slate-600">
+            سيكون التركيز الأكبر على جمهور الشركات والمشروعات؛ لأنه الأكثر ارتباطًا بالخدمات ذات القيمة التعاقدية المستمرة.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Platforms -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <h4 class="text-lg font-bold text-[#0a4975] mb-2">منصة Facebook</h4>
+          <p class="text-xs text-slate-600">بناء المجتمع الرقمي، الوصول لأصحاب الأعمال والشركات، وزيادة التفاعل والاستفسارات.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <h4 class="text-lg font-bold text-[#0a4975] mb-2">منصة Instagram</h4>
+          <p class="text-xs text-slate-600">بناء الهوية البصرية، عرض الخدمات بشكل جذاب، وتعزيز حضور العلامة التجارية.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 9: ROADMAP TIMELINE -->
+  <section id="roadmap" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-3">خارطة الطريق – أول 3 أشهر</h2>
+        <div class="w-16 h-1 bg-[#0a4975] mx-auto rounded-full"></div>
+      </div>
+
+      <!-- Timeline Tabs -->
+      <div class="flex justify-center mb-8">
+        <div class="bg-white p-1.5 rounded-2xl border border-slate-200 inline-flex gap-2">
+          <button onclick="switchTab(1)" id="tabBtn1" class="px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition bg-[#0a4975] text-white">
+            الشهر الأول (التأسيس)
+          </button>
+          <button onclick="switchTab(2)" id="tabBtn2" class="px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:bg-slate-50">
+            الشهر الثاني (التفاعل والثقة)
+          </button>
+          <button onclick="switchTab(3)" id="tabBtn3" class="px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:bg-slate-50">
+            الشهر الثالث (العملاء)
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Contents -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm">
+        
+        <!-- Tab 1 -->
+        <div id="tabContent1" class="space-y-6">
+          <div class="border-b border-slate-100 pb-3">
+            <span class="text-xs font-bold text-[#0a4975] bg-blue-50 px-3 py-1 rounded-full uppercase">MONTH 01</span>
+            <h3 class="text-2xl font-black text-slate-900 mt-2">Foundation & Awareness (التأسيس وبناء الوعي)</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm">
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+              <h4 className="font-bold text-[#0a4975] mb-2">أولاً: الهوية الرقمية</h4>
+              <p class="text-slate-600 leading-relaxed">• مراجعة وتطوير الصفحات وتوحيد الهوية البصرية على FB & IG.<br>• كتابة وصف احترافي وتجهيز بيانات التواصل.</p>
+            </div>
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+              <h4 class="font-bold text-[#0a4975] mb-2">ثانياً: المحتوى (15 قطعة)</h4>
+              <p class="text-slate-600 leading-relaxed">• منشورات تعريفية بالخدمات والشركة.<br>• نصائح حل المشكلات التقنية وتوعية IT.</p>
+            </div>
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+              <h4 class="font-bold text-[#0a4975] mb-2">ثالثاً: الإعلانات</h4>
+              <p class="text-slate-600 leading-relaxed">• حملات اكتساب المتابعين وزيارات الصفحة.<br>• اختبار شرائح الجمهور والتصاميم.</p>
+            </div>
+          </div>
+          <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 text-xs text-[#0a4975] font-semibold">
+            النتيجة المستهدفة: تأسيس حضور احترافي وبناء قاعدة متابعين أولية.
+          </div>
+        </div>
+
+        <!-- Tab 2 -->
+        <div id="tabContent2" class="hidden space-y-6">
+          <div class="border-b border-slate-100 pb-3">
+            <span class="text-xs font-bold text-[#0a4975] bg-blue-50 px-3 py-1 rounded-full uppercase">MONTH 02</span>
+            <h3 class="text-2xl font-black text-slate-900 mt-2">Engagement & Trust Building (تعزيز التفاعل والثقة)</h3>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <div class="font-bold text-[#0a4975] mb-1">01. تعليمي</div>
+              <p class="text-slate-600">الفرق بين السيرفر والكمبيوتر، حماية البيانات ونظام Backup.</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <div class="font-bold text-[#0a4975] mb-1">02. توعوي</div>
+              <p class="text-slate-600">مخاطر إهمال التحديثات وآثار توقف السيرفر على الإنتاجية.</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <div class="font-bold text-[#0a4975] mb-1">03. تسويقي</div>
+              <p class="text-slate-600">تفاصيل الخدمات، مميزات التعامل مع NET CORE والصيانة.</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <div class="font-bold text-[#0a4975] mb-1">04. بناء ثقة</div>
+              <p class="text-slate-600">طريقة العمل، خبرات الفريق، وتجارب واقعية مع العملاء.</p>
+            </div>
+          </div>
+          <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 text-xs text-[#0a4975] font-semibold">
+            النتيجة المستهدفة: بناء جمهور متفاعل وساخن (Warm Audience) جاهز للاستهداف البيعي.
+          </div>
+        </div>
+
+        <!-- Tab 3 -->
+        <div id="tabContent3" class="hidden space-y-6">
+          <div class="border-b border-slate-100 pb-3">
+            <span class="text-xs font-bold text-[#0a4975] bg-blue-50 px-3 py-1 rounded-full uppercase">MONTH 03</span>
+            <h3 class="text-2xl font-black text-slate-900 mt-2">Lead Generation (استهداف العملاء المحتملين)</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm">
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
+              <h4 class="font-bold text-[#0a4975]">الرسائل التسويقية المباشرة:</h4>
+              <p class="bg-white p-2 rounded border border-slate-200">"هل شركتك مستعدة لفقدان بياناتها بالكامل؟"</p>
+              <p class="bg-white p-2 rounded border border-slate-200">"هل تواجه شركتك مشكلات مستمرة في الشبكات؟"</p>
+              <p class="bg-white p-2 rounded border border-slate-200">"هل تبحث عن دعم فني موثوق دون فريق داخلي؟"</p>
+            </div>
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+              <h4 class="font-bold text-[#0a4975] mb-2">الحملات الإعلانية:</h4>
+              <p class="text-slate-600 leading-relaxed">• حملات رسائل WhatsApp/Messenger و Lead Gen.<br>• إعلانات مستقلة للخدمات بالأولوية: الدعم الفني ← الشبكات ← Backup ← السيرفرات.</p>
+            </div>
+          </div>
+          <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 text-xs text-[#0a4975] font-semibold">
+            النتيجة المستهدفة: بدء استقبال طلبات واستفسارات جادة من الشركات وتحويلها لتعاقدات.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 10: CONTENT & BUDGET -->
+  <section id="content" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-3">توزيع المحتوى والميزانية</h2>
+        <div class="w-16 h-1 bg-[#0a4975] mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16">
+        <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 shadow-sm">
+          <h3 class="text-base font-bold text-slate-900 mb-4 text-center">توزيع الـ 15 قطعة محتوى شهرياً</h3>
+          <div class="max-w-xs mx-auto">
+            <canvas id="contentChart"></canvas>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-xs sm:text-sm">
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between"><span>محتوى تعليمي وتوعوي</span><strong>5 قطع</strong></div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between"><span>محتوى تعريفي بالخدمات</span><strong>4 قطع</strong></div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between"><span>نصائح وحلول تقنية</span><strong>3 قطع</strong></div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between"><span>محتوى تفاعلي وأسئلة</span><strong>2 قطعة</strong></div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between"><span>محتوى بناء الثقة للهوية</span><strong>1 قطعة</strong></div>
+        </div>
+      </div>
+
+      <!-- SECTION 11: BUDGET SWITCHER -->
+      <div id="budget" class="pt-10 border-t border-slate-100">
+        <div class="text-center mb-10">
+          <h3 class="text-2xl font-bold text-slate-900 mb-2">خيارات ميزانية الإعلانات</h3>
+          <p class="text-xs text-slate-500">اختر الخطة لمشاهدة توزيع الميزانية</p>
+        </div>
+
+        <div class="flex justify-center mb-8">
+          <div class="bg-slate-100 p-1 rounded-2xl inline-flex">
+            <button onclick="setBudget('suggested')" id="budgetBtnSug" class="px-6 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0a4975] text-white shadow">
+              الميزانية المقترحة (5,000 ج.م)
+            </button>
+            <button onclick="setBudget('economic')" id="budgetBtnEco" class="px-6 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900">
+              الميزانية الاقتصادية (2,500 ج.م)
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 max-w-2xl mx-auto text-center">
+          <div class="text-xs text-slate-500 mb-1">الميزانية الإعلانية الشهرية</div>
+          <div id="budgetValue" class="text-4xl font-black text-[#0a4975] mb-6">5,000 <span class="text-sm font-normal">ج.م</span></div>
+
+          <div id="budgetDetails" class="space-y-2 text-xs text-slate-700">
+            <!-- Dynamic Content via JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 13: KPIS & OPERATION -->
+  <section id="kpis" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mb-3">مؤشرات الأداء وآلية التشغيل</h2>
+        <div class="w-16 h-1 bg-[#0a4975] mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <h3 class="font-bold text-[#0a4975] mb-3 border-b pb-2">مؤشرات الوعي</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">• Reach & Impressions<br>• زيارات الصفحات<br>• نمو المتابعين وتكلفة المتابع</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <h3 class="font-bold text-[#0a4975] mb-3 border-b pb-2">مؤشرات التفاعل</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">• Engagement Rate<br>• التعليقات والمشاركات والحفظ<br>• مشاهدات الفيديو وتكلفة التفاعل</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <h3 class="font-bold text-[#0a4975] mb-3 border-b pb-2">مؤشرات العملاء</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">• عدد الرسائل والاستفسارات<br>• العملاء المحتملين المؤهلين<br>• طلبات عروض الأسعار والفرص</p>
+        </div>
+      </div>
+
+      <!-- Moderation Card -->
+      <div class="bg-white border-2 border-[#0a4975] rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="text-xs font-bold bg-[#0a4975] text-white px-3 py-1 rounded-full">12 HOURS DAILY</span>
+          <h3 class="text-xl font-bold text-slate-900 mt-2 mb-1">إدارة الرسائل والتعليقات Moderation</h3>
+          <p class="text-xs text-slate-600 max-w-xl">متابعة الرسائل والتعليقات لمدة 12 ساعة يومياً، والرد على الاستفسارات وتصنيفها وتحويل الطلبات الفنية لمسؤول الشركة.</p>
+        </div>
+        <div class="bg-slate-50 px-6 py-4 rounded-2xl border border-slate-200 text-center">
+          <div class="text-2xl font-black text-[#0a4975]">12 ساعة</div>
+          <div class="text-[11px] text-slate-500">متابعة يومية</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 15: FINANCIAL PROPOSAL -->
+  <section id="financial" class="py-20 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <span class="text-xs font-bold text-[#0a4975] bg-blue-50 px-3 py-1 rounded-full uppercase">FINANCIAL PROPOSAL</span>
+        <h2 class="text-3xl sm:text-5xl font-black text-slate-900 mt-2">العرض المالي</h2>
+        <div class="w-16 h-1 bg-[#0a4975] mx-auto rounded-full mt-3"></div>
+      </div>
+
+      <!-- Management Fee -->
+      <div class="bg-slate-50 border-2 border-[#0a4975] rounded-3xl p-6 sm:p-8 max-w-4xl mx-auto mb-10">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-200 pb-6 mb-6">
+          <div>
+            <h3 class="text-2xl font-extrabold text-slate-900">أتعاب الإدارة والتسويق</h3>
+            <p class="text-xs text-slate-500">مدة المرحلة التأسيسية: 3 أشهر</p>
+          </div>
+          <div class="text-3xl sm:text-4xl font-black text-[#0a4975]">
+            3,500 <span class="text-sm font-bold text-slate-700">ج.م / شهرياً</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+          <div class="bg-white p-2.5 rounded-lg border border-slate-200">• إدارة صفحات Facebook و Instagram</div>
+          <div class="bg-white p-2.5 rounded-lg border border-slate-200">• إدارة المحتوى وإعداد خطة شهرية</div>
+          <div class="bg-white p-2.5 rounded-lg border border-slate-200">• كتابة النصوص وتصميم 15 قطعة محتوى</div>
+          <div class="bg-white p-2.5 rounded-lg border border-slate-200">• إدارة الإعلانات الممولة ومتابعتها</div>
+          <div class="bg-white p-2.5 rounded-lg border border-slate-200">• إدارة الرسائل والتعليقات 12 ساعة يومياً</div>
+          <div class="bg-white p-2.5 rounded-lg border border-slate-200">• تحليل الأداء وتقديم تقرير شهري</div>
+        </div>
+      </div>
+
+      <!-- Totals Comparison -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="bg-slate-50 border-2 border-[#0a4975] rounded-3xl p-6 text-center relative">
+          <span class="absolute -top-3 right-6 bg-[#0a4975] text-white text-[11px] font-bold px-3 py-1 rounded-full">الخطة المقترحة</span>
+          <h4 class="text-lg font-bold text-slate-900 mb-2">إجمالي الخطة المقترحة</h4>
+          <p class="text-xs text-slate-500 mb-4">أتعاب 3,500 + إعلانات 5,000</p>
+          <div class="text-3xl font-black text-[#0a4975]">8,500 <span class="text-xs text-slate-600 font-normal">ج.م / شهرياً</span></div>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 text-center">
+          <h4 class="text-lg font-bold text-slate-900 mb-2">إجمالي الخطة الاقتصادية</h4>
+          <p class="text-xs text-slate-500 mb-4">أتعاب 3,500 + إعلانات 2,500</p>
+          <div class="text-3xl font-black text-slate-900">6,000 <span class="text-xs text-slate-600 font-normal">ج.م / شهرياً</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FINAL VISION -->
+  <section class="py-20 bg-slate-900 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="text-xs font-bold text-[#26c9da] uppercase tracking-widest block mb-3">FINAL VISION</span>
+      <h2 class="text-3xl sm:text-5xl font-black mb-6">Building More Than a Brand.</h2>
+      <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-8 max-w-2xl mx-auto">
+        نحن نعمل على تأسيس علامة تجارية لها حضور واضح ومصداقية في سوق تكنولوجيا المعلومات، لتصبح NET CORE الخيار الأول عند حاجة الشركات لحلول تقنية موثوقة.
+      </p>
+      <div class="text-xl sm:text-2xl font-bold text-[#26c9da] mb-8">NET CORE – Your Technology Partner.</div>
+      <button onclick="scrollToId('financial')" class="bg-[#0a4975] hover:bg-[#083e64] text-white font-bold text-base px-8 py-3.5 rounded-xl shadow-lg transition">
+        ابدأ رحلتك مع NET CORE
+      </button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-slate-800 py-8 text-xs text-center sm:text-right">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <strong class="text-white">NET CORE – Information Technology</strong>
+      </div>
+      <div>
+        إعداد الاستراتيجية: <a href="https://www.ahmedhusseinmb.com/" target="_blank" class="text-[#26c9da] font-bold hover:underline">Ahmed Hussein</a>
+      </div>
+      <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="bg-slate-800 text-white p-2 rounded-lg">
+        ↑ لأعلى
+      </button>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Scroll Progress
+    window.onscroll = function() {
+      let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      let scrolled = (winScroll / height) * 100;
+      document.getElementById("scrollProgress").style.width = scrolled + "%";
+    };
+
+    // Smooth Scroll Helper
+    function scrollToId(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Roadmap Tabs Switcher
+    function switchTab(tabNum) {
+      for(let i=1; i<=3; i++) {
+        document.getElementById('tabContent' + i).classList.add('hidden');
+        document.getElementById('tabBtn' + i).className = "px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition text-slate-600 hover:bg-slate-50";
+      }
+      document.getElementById('tabContent' + tabNum).classList.remove('hidden');
+      document.getElementById('tabBtn' + tabNum).className = "px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition bg-[#0a4975] text-white shadow";
+    }
+
+    // Budget Switcher Logic
+    function setBudget(type) {
+      const valEl = document.getElementById('budgetValue');
+      const detEl = document.getElementById('budgetDetails');
+      const btnSug = document.getElementById('budgetBtnSug');
+      const btnEco = document.getElementById('budgetBtnEco');
+
+      if (type === 'suggested') {
+        valEl.innerHTML = '5,000 <span class="text-sm font-normal">ج.م</span>';
+        detEl.innerHTML = `
+          <div class="p-2.5 bg-white rounded border flex justify-between"><span>اكتساب متابعين وزيارات (50%)</span><strong>2,500 ج.م</strong></div>
+          <div class="p-2.5 bg-white rounded border flex justify-between"><span>حملات تفاعل مع المحتوى (30%)</span><strong>1,500 ج.م</strong></div>
+          <div class="p-2.5 bg-white rounded border flex justify-between"><span>وصول ووعي واختبار (20%)</span><strong>1,000 ج.م</strong></div>
+        `;
+        btnSug.className = "px-6 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0a4975] text-white shadow";
+        btnEco.className = "px-6 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900";
+      } else {
+        valEl.innerHTML = '2,500 <span class="text-sm font-normal">ج.م</span>';
+        detEl.innerHTML = `
+          <div class="p-2.5 bg-white rounded border flex justify-between"><span>اكتساب متابعين وزيارات (60%)</span><strong>1,500 ج.م</strong></div>
+          <div class="p-2.5 bg-white rounded border flex justify-between"><span>حملات تفاعل مع المحتوى (40%)</span><strong>1,000 ج.م</strong></div>
+        `;
+        btnEco.className = "px-6 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0a4975] text-white shadow";
+        btnSug.className = "px-6 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900";
+      }
+    }
+
+    // Initialize Default Budget State
+    setBudget('suggested');
+
+    // Chart.js Setup for Content Distribution
+    window.onload = function() {
+      const ctx = document.getElementById('contentChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['تعليمي وتوعوي', 'تعريفي بالخدمات', 'نصائح وحلول', 'تفاعلي وأسئلة', 'بناء الثقة والهوية'],
+          datasets: [{
+            data: [5, 4, 3, 2, 1],
+            backgroundColor: ['#0a4975', '#26c9da', '#083e64', '#1ea2b1', '#0d5684']
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    };
+  </script>
+</body>
+</html>
