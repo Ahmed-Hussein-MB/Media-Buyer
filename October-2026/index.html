@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVADO - تقرير الأداء التسويقي والمبيعات | أكتوبر 2026</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --primary: #626B43;
+            --secondary: #023b3c;
+            --bg-main: #F8F7F2;
+            --bg-card: #FFFFFF;
+            --text-main: #252A27;
+            --text-muted: #777C77;
+            --accent-light: #E9EDDF;
+            --border-color: #E6E7DF;
+            --shadow: 0 4px 20px -2px rgba(2, 59, 60, 0.05);
+            --shadow-hover: 0 10px 25px -5px rgba(2, 59, 60, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Number Font Override */
+        .num {
+            font-family: 'Inter', sans-serif;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        /* Layout Architecture */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Navigation Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--secondary);
+            color: #ffffff;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .brand-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #ffffff;
+            margin-bottom: 0.2rem;
+        }
+
+        .brand-slogan {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--accent-light);
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 1rem 0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            border-right: 4px solid transparent;
+        }
+
+        .nav-item a:hover, .nav-item.active a {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+            border-right-color: var(--primary);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-right: 280px;
+            flex-grow: 1;
+            padding: 2rem 3rem;
+            max-width: 1400px;
+            width: calc(100% - 280px);
+        }
+
+        /* Sticky Action Header */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: rgba(248, 247, 242, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+        }
+
+        .top-title {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #515937;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Sections & Cards */
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-tag {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.8rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Hero Section Styling */
+        .hero-card {
+            background: linear-gradient(135deg, var(--secondary) 0%, #012829 100%);
+            color: #ffffff;
+            border: none;
+            padding: 3.5rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(98, 107, 67, 0.25) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-light);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-meta-item label {
+            display: block;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-meta-item span {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        /* KPI Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .kpi-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        /* Visual Highlight Box */
+        .highlight-box {
+            background-color: var(--accent-light);
+            border-right: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Data Tables */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            font-size: 0.95rem;
+        }
+
+        .data-table th {
+            background-color: var(--secondary);
+            color: #ffffff;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+        }
+
+        .data-table tr:hover td {
+            background-color: #f3f2eb;
+        }
+
+        .winner-row td {
+            background-color: rgba(98, 107, 67, 0.08) !important;
+            font-weight: 700;
+        }
+
+        /* Badge Styling */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .badge-alt {
+            background-color: var(--secondary);
+            color: #ffffff;
+        }
+
+        /* Charts Layout */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 320px;
+            width: 100%;
+        }
+
+        /* Lists & Task Items */
+        .custom-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .custom-list li {
+            position: relative;
+            padding-right: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .custom-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Indicator Bars */
+        .indicator-card {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .indicator-val {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #b91c1c;
+            margin: 0.5rem 0;
+        }
+
+        .range-box {
+            background: var(--accent-light);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Financial Box */
+        .financial-card {
+            background: var(--secondary);
+            color: #ffffff;
+            text-align: center;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+        }
+
+        .financial-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--accent-light);
+            margin: 1rem 0;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-nav-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: var(--secondary);
+            color: #fff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Scroll To Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+            transition: var(--transition);
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-right: 0;
+                width: 100%;
+                padding: 1.5rem;
+            }
+            .mobile-nav-toggle {
+                display: flex;
+            }
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        /* PDF & Print Styles Optimization */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            .sidebar, .top-bar, .mobile-nav-toggle, .back-to-top, .btn {
+                display: none !important;
+            }
+            .main-content {
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            .section {
+                opacity: 1 !important;
+                transform: none !important;
+                page-break-inside: avoid;
+                margin-bottom: 2rem !important;
+            }
+            .card {
+                border: 1px solid #ccc !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+            .hero-card {
+                background: var(--secondary) !important;
+                color: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .financial-card {
+                background: var(--secondary) !important;
+                color: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .data-table th {
+                background-color: var(--secondary) !important;
+                color: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .badge {
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Toggle Menu">
+        <i data-lucide="menu"></i>
+    </button>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i data-lucide="arrow-up"></i>
+    </button>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-logo">EVADO</div>
+                <div class="brand-slogan">OWN EVERY STEP</div>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item active"><a href="#hero"><i data-lucide="home"></i>الرئيسية</a></li>
+                <li class="nav-item"><a href="#executive-summary"><i data-lucide="activity"></i>الملخص التنفيذي</a></li>
+                <li class="nav-item"><a href="#content-social"><i data-lucide="share-2"></i>المحتوى والتواصل</a></li>
+                <li class="nav-item"><a href="#paid-ads"><i data-lucide="target"></i>الإعلانات المدفوعة</a></li>
+                <li class="nav-item"><a href="#shopify-perf"><i data-lucide="shopping-bag"></i>أداء المتجر</a></li>
+                <li class="nav-item"><a href="#sales-perf"><i data-lucide="trending-up"></i>أداء المبيعات</a></li>
+                <li class="nav-item"><a href="#product-sales"><i data-lucide="box"></i>المبيعات حسب المنتجات</a></li>
+                <li class="nav-item"><a href="#customer-service"><i data-lucide="message-square"></i>خدمة العملاء</a></li>
+                <li class="nav-item"><a href="#business-eval"><i data-lucide="alert-triangle"></i>تقييم الأداء التجاري</a></li>
+                <li class="nav-item"><a href="#product-testing"><i data-lucide="layers"></i>اختبار المنتجات</a></li>
+                <li class="nav-item"><a href="#november-strategy"><i data-lucide="compass"></i>خطة نوفمبر</a></li>
+                <li class="nav-item"><a href="#overall-assessment"><i data-lucide="check-circle"></i>التقييم النهائي</a></li>
+                <li class="nav-item"><a href="#sales-target"><i data-lucide="award"></i>مستهدف نوفمبر</a></li>
+                <li class="nav-item"><a href="#financial-settlement"><i data-lucide="credit-card"></i>المستحقات المالية</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Action Bar -->
+            <div class="top-bar">
+                <div class="top-title">تقرير الأداء التسويقي والمبيعات – أكتوبر <span class="num">2026</span></div>
+                <!-- Removed print & PDF download buttons -->
+            </div>
+
+            <!-- 1. HERO SECTION -->
+            <section id="hero" class="section visible">
+                <div class="card hero-card">
+                    <div style="font-size: 0.9rem; letter-spacing: 2px; color: var(--accent-light); margin-bottom: 1rem; text-transform: uppercase;">
+                        Official Performance Dashboard
+                    </div>
+                    <h1 class="hero-title">EVADO</h1>
+                    <div class="hero-subtitle">Monthly Marketing & Sales Performance Report</div>
+                    
+                    <div class="hero-meta">
+                        <div class="hero-meta-item">
+                            <label>Reporting Period</label>
+                            <span>October 1 – October 31, 2026</span>
+                        </div>
+                        <div class="hero-meta-item">
+                            <label>Prepared by</label>
+                            <span>Marketing & Media Buying Team</span>
+                        </div>
+                        <div class="hero-meta-item">
+                            <label>Brand Tagline</label>
+                            <span>OWN EVERY STEP</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. EXECUTIVE OVERVIEW -->
+            <section id="executive-summary" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Executive Overview</span>
+                    <h2 class="section-title">الملخص التنفيذي</h2>
+                </div>
+                <div class="card">
+                    <p style="font-size: 1.05rem; margin-bottom: 1.5rem;">
+                        يُعد شهر أكتوبر أول شهر كامل من العمل الإعلاني والتسويقي لبراند <strong>EVADO</strong>، وقد شهد نتائج رقمية قوية جدًا مقارنة بكون البراند في مرحلة البداية. نجحنا خلال الشهر في تحقيق مؤشرات نجاح استثنائية:
+                    </p>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-title">إجمالي المبيعات شامل الشحن</div>
+                            <div class="kpi-value"><span class="num" data-counter="421885">0</span> <span style="font-size:1rem; font-weight:normal;">EGP</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">مبيعات المنتجات بدون الشحن</div>
+                            <div class="kpi-value"><span class="num" data-counter="392125">0</span> <span style="font-size:1rem; font-weight:normal;">EGP</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">إجمالي الطلبات</div>
+                            <div class="kpi-value"><span class="num" data-counter="475">0</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">القطع المباعة</div>
+                            <div class="kpi-value"><span class="num" data-counter="600">0</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">زيارات المتجر</div>
+                            <div class="kpi-value"><span class="num" data-counter="25730">0</span>+</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">معدل التحويل (CR)</div>
+                            <div class="kpi-value"><span class="num">1.8%</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Blended ROAS</div>
+                            <div class="kpi-value"><span class="num">6.55x</span></div>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 1rem; color: var(--text-main);">
+                        هذه النتائج تعكس نجاحًا واضحًا على مستوى التسويق الرقمي، وزيادة الوعي بالبراند، وجذب العملاء، وتحويل الزيارات إلى طلبات.
+                    </p>
+                    <p style="margin-top: 0.5rem; color: var(--text-main);">
+                        لكن في المقابل، هناك مجموعة من التحديات التجارية والتشغيلية التي تحتاج إلى مراجعة وتطوير، خصوصًا نسب عدم تأكيد الطلبات والمرتجعات، وهامش الربح الفعلي.
+                    </p>
+
+                    <div class="highlight-box">
+                        <strong>الخلاصة:</strong> أكتوبر كان شهرًا ناجحًا جدًا رقميًا وتسويقيًا، والخطوة التالية هي تحويل هذا النجاح إلى نتائج تشغيلية وربحية أقوى.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. CONTENT & SOCIAL MEDIA -->
+            <section id="content-social" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Content Creation</span>
+                    <h2 class="section-title">Content Creation & Social Media Management</h2>
+                </div>
+                <div class="card">
+                    <p style="margin-bottom: 1.5rem;">
+                        خلال شهر أكتوبر تم العمل على تنويع المحتوى المنشور بما يخدم أهداف البراند المختلفة، سواء زيادة الوعي أو التفاعل أو دعم المبيعات.
+                    </p>
+
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">Content Volume</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <div style="background: var(--bg-main); padding: 1.25rem; border-radius: 8px; text-align: center;">
+                            <i data-lucide="grid" style="color: var(--primary); margin-bottom: 0.5rem;"></i>
+                            <div style="font-size: 1.5rem; font-weight: 800;" class="num">31</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Social Media Posts</div>
+                        </div>
+                        <div style="background: var(--bg-main); padding: 1.25rem; border-radius: 8px; text-align: center;">
+                            <i data-lucide="video" style="color: var(--primary); margin-bottom: 0.5rem;"></i>
+                            <div style="font-size: 1.5rem; font-weight: 800;" class="num">14</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">TikTok Videos</div>
+                        </div>
+                    </div>
+
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">Content Categories</h3>
+                    <ul class="custom-list" style="margin-bottom: 2rem;">
+                        <li>محتوى تسويقي لعرض المنتجات وتشجيع الشراء.</li>
+                        <li>محتوى تفاعلي لزيادة مشاركة الجمهور والتفاعل مع الصفحة.</li>
+                        <li>محتوى تعليمي وتوعوي.</li>
+                        <li>نصائح ومعلومات مفيدة للعملاء.</li>
+                        <li>محتوى يركز على حل مشكلات العملاء والإجابة عن احتياجاتهم.</li>
+                    </ul>
+
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">Creative Production</h3>
+                    <ul class="custom-list" style="margin-bottom: 1.5rem;">
+                        <li>الصور والفيديوهات من الداتا المستلمة.</li>
+                        <li>تصميم صور جديدة باستخدام أدوات الذكاء الاصطناعي.</li>
+                        <li>تنويع طريقة عرض المنتجات بما يتناسب مع طبيعة الجمهور وأهداف الحملات.</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        الهدف من التنوع هو عدم الاعتماد على المحتوى البيعي المباشر فقط، بل بناء علاقة مع الجمهور وتقديم قيمة تساعد على زيادة الثقة بالبراند.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. PAID ADVERTISING -->
+            <section id="paid-ads" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Media Buying</span>
+                    <h2 class="section-title">Paid Advertising & Media Buying</h2>
+                </div>
+                <div class="card">
+                    <div style="background: var(--secondary); color: #fff; padding: 1.5rem; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <div style="font-size: 0.9rem; color: var(--accent-light);">إجمالي الإنفاق الإعلاني (Total Ad Spend)</div>
+                            <div style="font-size: 2.2rem; font-weight: 800;" class="num">59,870 EGP</div>
+                        </div>
+                        <i data-lucide="dollar-sign" style="width: 48px; height: 48px; opacity: 0.3;"></i>
+                    </div>
+
+                    <p style="margin-bottom: 1.5rem;">
+                        من المهم توضيح أن كامل الميزانية لم يتم توجيهها إلى حملات المبيعات المباشرة، بل تم توزيعها على عدة أهداف تسويقية.
+                    </p>
+
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">Campaign Objectives</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;">
+                            <i data-lucide="eye" style="color: var(--primary);"></i>
+                            <div style="font-weight: 600; margin-top: 0.5rem;">الوصول والمشاهدات</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">حملات زيادة المشاهدات والوصول.</div>
+                        </div>
+                        <div style="border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;">
+                            <i data-lucide="thumbs-up" style="color: var(--primary);"></i>
+                            <div style="font-weight: 600; margin-top: 0.5rem;">التفاعل</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">زيادة التفاعل مع المحتوى والصفحات.</div>
+                        </div>
+                        <div style="border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;">
+                            <i data-lucide="flask-conical" style="color: var(--primary);"></i>
+                            <div style="font-weight: 600; margin-top: 0.5rem;">اختبار المنتجات</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">اختبار 3 منتجات جديدة.</div>
+                        </div>
+                        <div style="border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;">
+                            <i data-lucide="sparkles" style="color: var(--primary);"></i>
+                            <div style="font-weight: 600; margin-top: 0.5rem;">اختبار الكريتيفز</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">تقييم زوايا تسويقية مختلفة.</div>
+                        </div>
+                        <div style="border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;">
+                            <i data-lucide="shopping-cart" style="color: var(--primary);"></i>
+                            <div style="font-weight: 600; margin-top: 0.5rem;">دعم المبيعات</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">دعم المنتجات التي أثبتت نجاحها.</div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <strong>ملاحظة تحليلية:</strong> جزء من الميزانية تم استثماره في الاختبار والتجربة، بهدف تحديد المنتجات والكريتيفز القادرة على تحقيق أفضل النتائج. وبالتالي، لا يصح تقييم كامل الإنفاق باعتباره ميزانية مخصصة للمبيعات المباشرة فقط. ومن المتوقع أن يكون العائد أعلى لو تم توجيه نسبة أكبر من الميزانية إلى المنتجات الـ Winners التي أثبتت نجاحها بالفعل، مع الاستمرار في تخصيص جزء مناسب لاختبار المنتجات الجديدة واكتشاف فرص نمو إضافية.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. SHOPIFY PERFORMANCE -->
+            <section id="shopify-perf" class="section">
+                <div class="section-header">
+                    <span class="section-tag">E-Commerce Metrics</span>
+                    <h2 class="section-title">Shopify Store Performance</h2>
+                    <div style="font-size: 0.9rem; color: var(--text-muted);">October 1 – October 31, 2026</div>
+                </div>
+                <div class="card">
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-title">Total Sessions</div>
+                            <div class="kpi-value"><span class="num">25,730</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Conversion Rate</div>
+                            <div class="kpi-value"><span class="num">1.8%</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Traffic Growth</div>
+                            <div class="kpi-value" style="color: #15803d;"><span class="num">+414%</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">CR Growth</div>
+                            <div class="kpi-value" style="color: #15803d;"><span class="num">+1.9%</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Total Orders</div>
+                            <div class="kpi-value"><span class="num">475</span></div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Units Sold</div>
+                            <div class="kpi-value"><span class="num">600</span></div>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <!-- Funnel / Flow Metrics View -->
+                        <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px; display: flex; flex-direction: column; justify-content: center;">
+                            <h4 style="margin-bottom: 1.5rem; text-align: center; color: var(--secondary);">تسلسل ومسار تحويل حركة المتجر (Conversion Funnel Flow)</h4>
+                            
+                            <!-- Parent Session Node -->
+                            <div style="background: var(--secondary); color: #fff; padding: 1.25rem; border-radius: 10px; text-align: center; position: relative; margin-bottom: 2rem; box-shadow: var(--shadow);">
+                                <div style="font-size: 0.85rem; color: var(--accent-light);">1. إجمالي زيارات المتجر (Total Sessions)</div>
+                                <div style="font-size: 2.2rem; font-weight: 800;" class="num">25,730</div>
+                                <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">زيارة للمتجر الإلكتروني</div>
+                                <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 2px; height: 20px; background: var(--primary);"></div>
+                            </div>
+
+                            <!-- Branch Divider -->
+                            <div style="display: flex; justify-content: space-between; position: relative; gap: 1rem;">
+                                <!-- Left Branch: Orders -->
+                                <div style="flex: 1; background: #fff; border: 2px solid var(--primary); padding: 1.25rem; border-radius: 10px; text-align: center; box-shadow: var(--shadow); position: relative;">
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">2. الطلبات المسجلة (Total Orders)</div>
+                                    <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary);" class="num">475</div>
+                                    <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">معدل تحويل 1.8%</div>
+                                    
+                                    <!-- Arrow Down to Units -->
+                                    <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 2px; height: 20px; background: var(--secondary);"></div>
+                                </div>
+                            </div>
+
+                            <!-- Sub Child Node: Units Sold -->
+                            <div style="margin-top: 2rem; background: #fff; border: 2px solid var(--secondary); padding: 1.25rem; border-radius: 10px; text-align: center; box-shadow: var(--shadow);">
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">3. عدد القطع المباعة (Units Sold)</div>
+                                <div style="font-size: 1.8rem; font-weight: 800; color: var(--secondary);" class="num">600</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">متوسط <span class="num">1.26</span> قطعة لكل طلب</div>
+                            </div>
+                        </div>
+
+                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                            <h4 style="margin-bottom: 1rem; text-align: center; color: var(--secondary);">نسبة نمو الزيارات ومعدل التحويل</h4>
+                            <div class="chart-container">
+                                <canvas id="growthChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5rem;">
+                        <h3 style="color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem;">Performance Analysis</h3>
+                        <ul class="custom-list">
+                            <li>وصول الزيارات إلى 25,730 زيارة يعكس نجاح الحملات في جذب الجمهور إلى المتجر.</li>
+                            <li>نمو الزيارات بنسبة 414% يعكس توسعًا كبيرًا في حجم الحركة على الموقع.</li>
+                            <li>معدل التحويل 1.8% يمثل مؤشرًا مهمًا على قدرة المتجر على تحويل جزء من الزوار إلى طلبات.</li>
+                            <li>تسجيل 475 طلبًا وبيع 600 قطعة يعكس وجود طلب فعلي على المنتجات.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. SALES PERFORMANCE -->
+            <section id="sales-perf" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Financial Breakdown</span>
+                    <h2 class="section-title">Sales Performance</h2>
+                </div>
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>البند</th>
+                                    <th>القيمة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>إجمالي الطلبات</td>
+                                    <td class="num">475 طلبًا</td>
+                                </tr>
+                                <tr>
+                                    <td>إجمالي القطع المباعة</td>
+                                    <td class="num">600 قطعة</td>
+                                </tr>
+                                <tr>
+                                    <td>المبيعات بدون الشحن</td>
+                                    <td class="num">392,125 جنيهًا</td>
+                                </tr>
+                                <tr>
+                                    <td>مصاريف الشحن المسجلة</td>
+                                    <td class="num">29,760 جنيهًا</td>
+                                </tr>
+                                <tr style="font-weight: 700; background: var(--accent-light);">
+                                    <td>إجمالي المبيعات شامل الشحن</td>
+                                    <td class="num" style="color: var(--secondary); font-size: 1.1rem;">421,885 جنيهًا</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 style="color: var(--secondary); margin: 1.5rem 0 1rem; font-size: 1.1rem;">Performance Averages</h3>
+                    <div class="kpi-grid">
+                        <div class="kpi-card" style="border-top-color: var(--secondary);">
+                            <div class="kpi-title">Average Order Value (AOV)</div>
+                            <div class="kpi-value"><span class="num">825</span> <span style="font-size: 0.9rem;">EGP</span></div>
+                        </div>
+                        <div class="kpi-card" style="border-top-color: var(--secondary);">
+                            <div class="kpi-title">Average Revenue Per Unit</div>
+                            <div class="kpi-value"><span class="num">654</span> <span style="font-size: 0.9rem;">EGP</span></div>
+                        </div>
+                        <div class="kpi-card" style="border-top-color: var(--secondary);">
+                            <div class="kpi-title">Ad Spend Per Recorded Order</div>
+                            <div class="kpi-value"><span class="num">126</span> <span style="font-size: 0.9rem;">EGP</span></div>
+                        </div>
+                    </div>
+
+                    <!-- ROAS Section -->
+                    <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 10px; margin-top: 1.5rem; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--secondary); margin-bottom: 1rem; text-align: center;">تحليل العائد على الإنفاق الإعلاني (ROAS)</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; text-align: center;">
+                            <div style="background: #fff; padding: 1.25rem; border-radius: 8px; border: 2px solid var(--primary);">
+                                <div style="font-size: 0.85rem; color: var(--text-muted);">ROAS بدون الشحن</div>
+                                <div style="font-size: 2.2rem; font-weight: 800; color: var(--primary);" class="num">6.55x</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);" class="num">392,125 ÷ 59,870</div>
+                            </div>
+                            <div style="background: #fff; padding: 1.25rem; border-radius: 8px; border: 2px solid var(--secondary);">
+                                <div style="font-size: 0.85rem; color: var(--text-muted);">ROAS شامل الشحن</div>
+                                <div style="font-size: 2.2rem; font-weight: 800; color: var(--secondary);" class="num">7.05x</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);" class="num">421,885 ÷ 59,870</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.95rem; text-align: center;">
+                            بمعنى أن كل جنيه تم إنفاقه على الإعلانات قابله حوالي <strong>6.55 جنيه</strong> مبيعات للمنتجات بدون الشحن.
+                        </p>
+                        <div class="highlight-box" style="margin-bottom: 0; font-size: 0.85rem;">
+                            <strong>Important Note:</strong> هذه النسبة هي Blended ROAS على مستوى إجمالي مبيعات المتجر مقابل إجمالي الإنفاق الإعلاني، وليست بالضرورة ROAS المنسوب مباشرة إلى منصة إعلانية أو حملة بعينها. كما أنها لا تمثل صافي الربح.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. PRODUCT PERFORMANCE -->
+            <section id="product-sales" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Product Analytics</span>
+                    <h2 class="section-title">Sales by Product | المبيعات حسب المنتجات</h2>
+                </div>
+                <div class="card">
+                    <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-bottom: 1rem; align-items: center; flex-wrap: wrap;">
+                        <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">ترتيب الجدول حسب:</span>
+                        <button class="btn btn-secondary" id="sortBySales" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">إجمالي المبيعات</button>
+                        <button class="btn btn-secondary" id="sortByUnits" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">القطع المباعة</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table" id="productTable">
+                            <thead>
+                                <tr>
+                                    <th>المنتج (Product)</th>
+                                    <th>القطع المباعة (Units Sold)</th>
+                                    <th>إجمالي المبيعات (Total Sales)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productTableBody">
+                                <!-- Dynamically Rendered via JS -->
+                            </tbody>
+                            <tfoot>
+                                <tr style="font-weight: 800; background: var(--secondary); color: #fff;">
+                                    <td style="font-weight: 800; background: var(--secondary); color: #fff;" >TOTAL</td>
+                                    <td style="font-weight: 800; background: var(--secondary); color: #fff; " class="num" >600</td>
+                                    <td style="font-weight: 800; background: var(--secondary); color: #fff; " class="num" >392,125 EGP</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                            <h4 style="margin-bottom: 1rem; text-align: center; color: var(--secondary);">مبيعات المنتجات بالجنيه</h4>
+                            <div class="chart-container">
+                                <canvas id="productsBarChart"></canvas>
+                            </div>
+                        </div>
+                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                            <h4 style="margin-bottom: 1rem; text-align: center; color: var(--secondary);">مساهمة المنتجات في المبيعات</h4>
+                            <div class="chart-container">
+                                <canvas id="productsDonutChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Winner Product Highlight Card -->
+                    <div style="border: 2px solid var(--primary); background: rgba(98, 107, 67, 0.05); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                            <div>
+                                <span class="badge" style="margin-bottom: 0.5rem;">TOP SELLING PRODUCT</span>
+                                <h3 style="color: var(--secondary); font-size: 1.4rem;">Winner Product – adidas Eva AERO</h3>
+                            </div>
+                            <div style="text-align: left;">
+                                <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary);" class="num">288,600 EGP</div>
+                                <div style="font-size: 0.85rem; color: var(--text-muted);" class="num">444 Units Sold</div>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                            <div style="background: #fff; padding: 0.8rem; border-radius: 6px; text-align: center; border: 1px solid var(--border-color);">
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">نسبة المبيعات المالية</div>
+                                <div style="font-weight: 700; font-size: 1.1rem; color: var(--secondary);" class="num">68.4%</div>
+                            </div>
+                            <div style="background: #fff; padding: 0.8rem; border-radius: 6px; text-align: center; border: 1px solid var(--border-color);">
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">نسبة القطع المباعة</div>
+                                <div style="font-weight: 700; font-size: 1.1rem; color: var(--secondary);" class="num">74.0%</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.95rem; color: var(--text-main);">
+                            يمثل المنتج الأبرز خلال الشهر، وهذا يجعله المنتج الرئيسي الذي يجب الاستمرار في دعمه إعلانيًا، مع تطوير Creatives جديدة وإنتاج محتوى إضافي له. كما حقق Adidas Eva وUnder Armour CORE EVA نتائج جيدة تستحق المتابعة والتوسع في اختبارها.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. CUSTOMER SERVICE -->
+            <section id="customer-service" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Operations Support</span>
+                    <h2 class="section-title">Customer Service & Community Management</h2>
+                </div>
+                <div class="card">
+                    <p style="margin-bottom: 1.5rem;">
+                        تمت متابعة الرسائل والتعليقات بشكل يومي طوال شهر أكتوبر دون انقطاع، مع اعتبار خدمة العملاء جزءًا أساسيًا من منظومة تحقيق المبيعات وليس مجرد خدمة للرد على الرسائل.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div style="border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 8px;">
+                            <h3 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;">
+                                <i data-lucide="clock" style="color: var(--primary);"></i> Coverage & Follow-up
+                            </h3>
+                            <ul class="custom-list">
+                                <li>متابعة الرسائل والتعليقات يوميًا.</li>
+                                <li>تغطية تتجاوز 12 ساعة يوميًا.</li>
+                                <li>الرد على استفسارات العملاء ومساعدتهم في اختيار المنتجات والمقاسات.</li>
+                                <li>متابعة العملاء القادمين من الحملات الإعلانية.</li>
+                            </ul>
+                        </div>
+
+                        <div style="border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 8px;">
+                            <h3 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;">
+                                <i data-lucide="trending-up" style="color: var(--primary);"></i> Sales Contribution
+                            </h3>
+                            <p style="font-size: 0.9rem;">
+                                لم يقتصر دور خدمة العملاء على الرد على الاستفسارات، بل ساهمت بشكل مباشر في استكمال عمليات البيع. تم تحويل عدد كبير من المحادثات الواردة من الإعلانات إلى طلبات فعلية، خاصة من العملاء الذين لا يستطيعون إتمام الطلب من خلال الموقع الإلكتروني.
+                            </p>
+                        </div>
+
+                        <div style="border: 1px solid var(--border-color); padding: 1.25rem; border-radius: 8px;">
+                            <h3 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;">
+                                <i data-lucide="refresh-cw" style="color: var(--primary);"></i> Operational Coordination
+                            </h3>
+                            <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">تمت متابعة مشكلات العملاء المتعلقة بـ:</p>
+                            <ul class="custom-list">
+                                <li>الاسترجاع والاستبدال.</li>
+                                <li>تأخيرات الشحن والشكاوى.</li>
+                                <li>التنسيق المستمر مع فريق Operations لمتابعة الحالات وتحسين تجربة العملاء.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. BUSINESS PERFORMANCE EVALUATION -->
+            <section id="business-eval" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Critical Analysis</span>
+                    <h2 class="section-title">Business Performance Evaluation</h2>
+                </div>
+                <div class="card" style="border-right: 6px solid #b91c1c;">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.2rem;">First: Unconfirmed Orders & Returns</h3>
+                    <p style="margin-bottom: 1rem;">
+                        وفقًا للمعلومات التي تمت مشاركتها من مسؤولي البراند، فإن إجمالي نسبة الطلبات غير المؤكدة والطلبات المرتجعة معًا يصل إلى حوالي <strong>50%</strong>.
+                    </p>
+
+                    <div class="indicator-card" style="margin-bottom: 1.5rem; background: rgba(185, 28, 28, 0.03); border-color: rgba(185, 28, 28, 0.2);">
+                        <div style="font-size: 0.9rem; color: var(--text-muted);">Combined Unconfirmed & Returned Orders</div>
+                        <div class="indicator-val" class="num">~50%</div>
+                        <div style="font-size: 0.85rem; color: #b91c1c; font-weight: 600;">
+                            تنبيه هام: هذه النسبة تمثل الفئتين معًا، وليست نسبة المرتجعات وحدها أو نسبة الطلبات غير المؤكدة وحدها.
+                        </div>
+                    </div>
+
+                    <p style="margin-bottom: 1.5rem;">
+                        هذه النسبة مرتفعة وتحتاج إلى إعادة تقييم جادة، لأنها تؤثر على عدد الطلبات التي تتحول إلى عمليات تسليم ناجحة، وعلى العائد الفعلي من الحملات.
+                    </p>
+
+                    <h4 style="color: var(--secondary); margin-bottom: 0.75rem;">Required Actions (قائمة المهام المطلوبة):</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem;">
+                        <div style="background: var(--bg-main); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem;">1. مراجعة سرعة التواصل مع العملاء لتأكيد الطلبات.</div>
+                        <div style="background: var(--bg-main); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem;">2. تحليل أسباب عدم تأكيد الطلبات.</div>
+                        <div style="background: var(--bg-main); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem;">3. تحليل أسباب رفض الاستلام والمرتجعات.</div>
+                        <div style="background: var(--bg-main); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem;">4. مراجعة مدى تطابق المنتجات مع الصور والوصف.</div>
+                        <div style="background: var(--bg-main); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem;">5. مراجعة جودة وسرعة الشحن.</div>
+                        <div style="background: var(--bg-main); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem;">6. تحسين التنسيق بين خدمة العملاء وفريق Operations.</div>
+                        <div style="background: var(--bg-main); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem;">7. تسجيل أسباب كل حالة بشكل واضح لتحديد مصدر المشكلة.</div>
+                    </div>
+
+                    <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Delivery Rate Benchmark (المعيار المستهدف):</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                        من واقع الخبرة مع البراندات الأخرى التي يتم العمل معها، فإن معدلات التسليم المعتادة تتراوح بين 70% و80% أو أكثر.
+                    </p>
+                    <div class="range-box" style="margin-bottom: 1.5rem;">
+                        Delivery Target Benchmark: <span class="num">70% – 80%+</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                        لذلك يجب العمل على تحسين معدل التسليم الفعلي تدريجيًا، مع تحديد نقطة الضعف ومعالجتها بدل الاكتفاء بزيادة الإنفاق الإعلاني.
+                    </p>
+
+                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.2rem;">Second: Profit Margin</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div style="background: rgba(98, 107, 67, 0.1); border: 1px solid var(--primary); padding: 1.25rem; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Target Profit Margin</div>
+                            <div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);" class="num">250 – 300 EGP / Unit</div>
+                        </div>
+                        <div style="background: rgba(185, 28, 28, 0.05); border: 1px solid rgba(185, 28, 28, 0.3); padding: 1.25rem; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Current Estimated Profit Margin</div>
+                            <div style="font-size: 1.6rem; font-weight: 800; color: #b91c1c;" class="num">Less than 150 EGP / Unit</div>
+                        </div>
+                    </div>
+
+                    <p style="margin-bottom: 1rem;">
+                        كان الهامش المستهدف للربح من كل قطعة يتراوح بين 250 إلى 300 جنيه. لكن وفقًا للمراجعة الحالية، فإن هامش الربح أصبح أقل من 150 جنيهًا للقطعة، وهو أقل من المستهدف بشكل واضح. هذا الأمر يجعل النتائج التجارية أقل من المتوقع، خاصة مع وجود نسبة مرتفعة من الطلبات غير المؤكدة والمرتجعات.
+                    </p>
+
+                    <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Recommendations (توصيات الهامش الربحي):</h4>
+                    <ul class="custom-list" style="margin-bottom: 1rem;">
+                        <li>إعادة مراجعة تكلفة شراء وتصنيع المنتجات.</li>
+                        <li>مراجعة أسعار البيع الحالية.</li>
+                        <li>دراسة تكاليف الشحن والاستبدال والمرتجعات.</li>
+                        <li>حساب التكلفة الفعلية لكل طلب تم تسليمه.</li>
+                        <li>تحديد هامش الربح الحقيقي لكل موديل.</li>
+                        <li>عدم تقديم خصومات جديدة قبل التأكد من تأثيرها على هامش الربح.</li>
+                    </ul>
+
+                    <div style="background: var(--secondary); color: #fff; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 600;">
+                        Objective: الوصول إلى هامش ربح مناسب يسمح بالاستمرار في التوسع الإعلاني وتحقيق نمو حقيقي ومستدام.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. PRODUCT TESTING & CREATIVES -->
+            <section id="product-testing" class="section">
+                <div class="section-header">
+                    <span class="section-tag">R&D & Content Production</span>
+                    <h2 class="section-title">New Product Testing & Creative Development</h2>
+                </div>
+                <div class="card">
+                    <p style="margin-bottom: 1.5rem;">
+                        خلال أكتوبر تم اختبار 3 منتجات جديدة. لكن واجهنا تحديًا يتعلق بقلة الداتا المتاحة لهذه المنتجات مقارنة بالمنتجات التي تم استلامها في بداية العمل، والتي كانت تتوفر لها مواد تصويرية ومحتوى أكثر تنوعًا. محدودية الداتا المتاحة قللت من فرص تقديم زوايا إعلانية متعددة واختبار عدد أكبر من الكريتيفز.
+                    </p>
+
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">New Product Testing Plan</h3>
+                    <ul class="custom-list" style="margin-bottom: 1.5rem;">
+                        <li>تصوير فيديوهات UGC للمنتجات الثلاثة.</li>
+                        <li>إنتاج فيديوهين لكل منتج.</li>
+                        <li>إجمالي مستهدف: 6 فيديوهات UGC.</li>
+                        <li>التنسيق على الأفكار والسيناريوهات وتفاصيل التصوير خلال الأيام القادمة.</li>
+                    </ul>
+
+                    <div style="background: var(--accent-light); padding: 1.25rem; border-radius: 8px; text-align: center; font-size: 1.3rem; font-weight: 800; color: var(--secondary); margin-bottom: 1.5rem;" class="num">
+                        3 Products × 2 Videos = 6 UGC Videos
+                    </div>
+
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">Winner Products Creative Development</h3>
+                    <p style="margin-bottom: 0.75rem;">بالتوازي مع اختبار المنتجات الجديدة، سنعمل على:</p>
+                    <ul class="custom-list">
+                        <li>إنتاج Variations جديدة للمنتجات التي أثبتت نجاحها.</li>
+                        <li>تطوير زوايا تسويقية مختلفة لنفس المنتج.</li>
+                        <li>إعداد Creatives جديدة بدل الاعتماد المستمر على نفس الإعلانات.</li>
+                        <li>دراسة تصوير فيديوهات UGC للمنتجات الـ Winners أيضًا.</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        الهدف هو الحفاظ على المنتجات الناجحة وتوسيع فرص بيعها، مع الاستمرار في اكتشاف منتجات جديدة يمكن أن تصبح Winners مستقبلًا.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. NOVEMBER STRATEGY -->
+            <section id="november-strategy" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Action Plan</span>
+                    <h2 class="section-title">November Strategy | خطة العمل لشهر نوفمبر</h2>
+                </div>
+                <div class="card">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+                        <div style="border: 1px solid var(--border-color); border-top: 4px solid var(--secondary); padding: 1.25rem; border-radius: 8px;">
+                            <span class="badge" style="margin-bottom: 0.5rem;">PRIORITY 01</span>
+                            <h3 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 0.5rem;">Improve Business Performance</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">الأولوية ليست زيادة عدد الطلبات فقط، بل تحسين جودة الطلبات ورفع نسبة التسليم الفعلي.</p>
+                            <ul class="custom-list" style="font-size: 0.85rem;">
+                                <li>تحليل حالات عدم التأكيد والمرتجعات.</li>
+                                <li>تحسين عملية تأكيد الطلبات ومتابعة الشحن.</li>
+                                <li>مراجعة هامش الربح لكل منتج.</li>
+                            </ul>
+                        </div>
+
+                        <div style="border: 1px solid var(--border-color); border-top: 4px solid var(--primary); padding: 1.25rem; border-radius: 8px;">
+                            <span class="badge" style="margin-bottom: 0.5rem;">PRIORITY 02</span>
+                            <h3 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 0.5rem;">Focus on Winner Products</h3>
+                            <ul class="custom-list" style="font-size: 0.85rem;">
+                                <li>زيادة الاستثمار في المنتجات التي أثبتت نجاحها.</li>
+                                <li>تطوير Creatives جديدة للمنتجات الأعلى مبيعًا.</li>
+                                <li>دعم المنتجات ذات هامش الربح الأفضل.</li>
+                            </ul>
+                        </div>
+
+                        <div style="border: 1px solid var(--border-color); border-top: 4px solid var(--secondary); padding: 1.25rem; border-radius: 8px;">
+                            <span class="badge" style="margin-bottom: 0.5rem;">PRIORITY 03</span>
+                            <h3 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 0.5rem;">New Product Development</h3>
+                            <ul class="custom-list" style="font-size: 0.85rem;">
+                                <li>استكمال تصوير 6 فيديوهات UGC للمنتجات الجديدة.</li>
+                                <li>اختبار الفيديوهات عبر حملات إعلانية.</li>
+                                <li>تقييم الأداء بناءً على التسليم والربحية.</li>
+                            </ul>
+                        </div>
+
+                        <div style="border: 1px solid var(--border-color); border-top: 4px solid #b91c1c; padding: 1.25rem; border-radius: 8px;">
+                            <span class="badge" style="background: #b91c1c; margin-bottom: 0.5rem;">PRIORITY 04</span>
+                            <h3 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 0.5rem;">Black Friday Preparation</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">إعداد عروض استثنائية مع الحفاظ على هامش ربح مناسب.</p>
+                        </div>
+                    </div>
+
+                    <!-- Black Friday Offers Grid -->
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.2rem;">Proposed Black Friday Offers</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--secondary); display: block;">1. Black Friday Price Drop</strong>
+                            <span style="font-size: 0.85rem;">تخفيضات خاصة على منتجات مختارة لفترة محدودة.</span>
+                        </div>
+                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--secondary); display: block;">2. Buy More, Save More</strong>
+                            <span style="font-size: 0.85rem;">عروض متدرجة عند شراء قطعتين أو ثلاث قطع.</span>
+                        </div>
+                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--secondary); display: block;">3. Bundle Offers</strong>
+                            <span style="font-size: 0.85rem;">باقات تجمع بين منتجات مختلفة بسعر مميز.</span>
+                        </div>
+                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--secondary); display: block;">4. Flash Sales</strong>
+                            <span style="font-size: 0.85rem;">عروض سريعة لمدة 6 أو 12 ساعة.</span>
+                        </div>
+                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--secondary); display: block;">5. Buy More, Get a Gift</strong>
+                            <span style="font-size: 0.85rem;">هدية إضافية بشرط مناسبة التكلفة للربحية.</span>
+                        </div>
+                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--secondary); display: block;">6. Last Chance Offers</strong>
+                            <span style="font-size: 0.85rem;">عروض ختامية خلال الأيام الأخيرة من الموسم.</span>
+                        </div>
+                    </div>
+
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">Black Friday Advertising Preparation</h3>
+                    <p style="margin-bottom: 0.75rem;">يجب التعامل مع الموسم باعتباره حملة تسويقية مستقلة:</p>
+                    <ul class="custom-list">
+                        <li>تصميم هوية إعلانية خاصة بموسم Black Friday.</li>
+                        <li>تجهيز Creatives مخصصة لكل عرض وإنتاج صور وفيديوهات متنوعة.</li>
+                        <li>كتابة رسائل إعلانية مختلفة لكل شريحة من الجمهور.</li>
+                        <li>تخصيص حملات للمنتجات الـ Winners ووضع خطة توزيع للميزانية.</li>
+                    </ul>
+
+                    <div class="highlight-box" style="border-right-color: #b91c1c;">
+                        <strong>Important Note:</strong> يجب مراجعة ربحية كل عرض قبل إطلاقه حتى لا تؤدي زيادة المبيعات إلى تقليل هامش الربح بصورة غير مناسبة.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 12. OVERALL ASSESSMENT -->
+            <section id="overall-assessment" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Summary & Review</span>
+                    <h2 class="section-title">Overall Assessment | التقييم النهائي</h2>
+                </div>
+                <div class="card">
+                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">
+                        بناءً على نتائج أكتوبر، يمكن اعتبار الشهر نجاحًا رقميًا وتسويقيًا كبيرًا جدًا بالنسبة لبراند جديد وفي أول شهر كامل من الإعلانات والمبيعات.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div style="background: rgba(98, 107, 67, 0.05); border: 1px solid var(--primary); padding: 1.25rem; border-radius: 8px;">
+                            <h3 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 0.75rem;">Key Achievements (أبرز الإنجازات)</h3>
+                            <ul class="custom-list" style="font-size: 0.9rem;">
+                                <li>تحقيق 421,885 جنيهًا إجمالي مبيعات وتسجيل 475 طلبًا وبيع 600 قطعة.</li>
+                                <li>تحقيق 25,730 زيارة للمتجر بمعدل تحويل 1.8%.</li>
+                                <li>تحقيق Blended ROAS بقيمة 6.55x على المبيعات بدون الشحن.</li>
+                                <li>نشر 31 بوستًا و14 فيديو على TikTok وبناء حضور رقمي.</li>
+                                <li>اكتشاف المنتج الرئيسي Winner وتوفير تغطية يومية لخدمة العملاء.</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(185, 28, 28, 0.03); border: 1px solid rgba(185, 28, 28, 0.2); padding: 1.25rem; border-radius: 8px;">
+                            <h3 style="color: #b91c1c; font-size: 1.1rem; margin-bottom: 0.75rem;">Key Challenges (التحديات الرئيسية)</h3>
+                            <ul class="custom-list" style="font-size: 0.9rem;">
+                                <li>ارتفاع إجمالي نسبة الطلبات غير المؤكدة والمرتجعات إلى حوالي 50%.</li>
+                                <li>انخفاض هامش الربح عن المستهدف (أقل من 150 EGP).</li>
+                                <li>الحاجة إلى تطوير الداتا والكريتيفز للمنتجات الجديدة.</li>
+                                <li>الحاجة إلى تحسين التنسيق بين التسويق والتشغيل والشحن.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3 style="color: var(--secondary); margin-bottom: 0.75rem;">Strategic Outlook</h3>
+                    <p style="font-size: 0.95rem;">
+                        لدينا أساس رقمي قوي يمكن البناء عليه، لكن الأولوية في نوفمبر يجب أن تكون تحسين جودة النتائج التجارية. نحتاج إلى الانتقال من مرحلة تحقيق أرقام قوية على مستوى الإعلانات والداشبورد إلى مرحلة تحقيق مبيعات مسلّمة وربحية فعلية أعلى. النجاح في أكتوبر لم يكن مجرد زيادة في الإنفاق الإعلاني، بل كان بناء قاعدة تسويقية للبراند واختبار المنتجات والمرحلة القادمة هي استغلال هذه النتائج لتطوير الأداء.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 13. NOVEMBER SALES TARGET -->
+            <section id="sales-target" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Growth Forecasting</span>
+                    <h2 class="section-title">November Sales Growth Target</h2>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <p style="font-size: 1.05rem; margin-bottom: 1.5rem;">
+                        نستهدف خلال شهر نوفمبر، بإذن الله، تحقيق نمو في إجمالي المبيعات بنسبة تتراوح بين <strong>20% و25%</strong> مقارنة بشهر أكتوبر.
+                    </p>
+
+                    <div class="range-box" style="padding: 2rem; margin-bottom: 1.5rem;">
+                        <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">November Sales Target Range</div>
+                        <div style="font-size: 2.8rem; font-weight: 800; color: var(--secondary);" class="num">506,000 – 527,000 EGP</div>
+                    </div>
+
+                    <div class="table-responsive" style="max-width: 600px; margin: 0 auto 1.5rem;">
+                        <table class="data-table" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Target Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>October Sales (Base)</td>
+                                    <td class="num">421,885 EGP</td>
+                                </tr>
+                                <tr>
+                                    <td>20% Growth Target</td>
+                                    <td class="num" style="font-weight:700;">506,262 EGP</td>
+                                </tr>
+                                <tr style="background: var(--accent-light);">
+                                    <td>25% Growth Target</td>
+                                    <td class="num" style="font-weight:800; color:var(--secondary);">527,356 EGP</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 style="color: var(--secondary); margin-bottom: 0.75rem; text-align: right;">وسائل تحقيق المستهدف:</h4>
+                    <ul class="custom-list" style="text-align: right; margin-bottom: 1.5rem;">
+                        <li>زيادة الاستثمار في المنتجات الـ Winners.</li>
+                        <li>تطوير الكريتيفز واختبار زوايا إعلانية جديدة.</li>
+                        <li>إطلاق عروض Black Friday بشكل مدروس.</li>
+                        <li>تحسين معدل تأكيد الطلبات والتسليم الفعلي وتقليل المرتجعات.</li>
+                        <li>تحسين هامش الربح ومتوسط قيمة الطلب.</li>
+                    </ul>
+
+                    <div class="highlight-box" style="text-align: right; margin-bottom: 0;">
+                        هدفنا ليس فقط زيادة المبيعات بنسبة 20–25%، ولكن تحقيق النمو بالتوازي مع تحسين نسبة التسليم والربحية، لضمان أن تكون الزيادة في المبيعات زيادة حقيقية في العائد التجاري للبراند.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 14. FINANCIAL SETTLEMENT -->
+            <section id="financial-settlement" class="section">
+                <div class="section-header">
+                    <span class="section-tag">Accountability</span>
+                    <h2 class="section-title">Financial Settlement | المستحقات المالية</h2>
+                </div>
+                <div class="financial-card">
+                    <i data-lucide="award" style="width: 50px; height: 50px; color: var(--accent-light); margin-bottom: 1rem;"></i>
+                    <h3 style="font-size: 1.2rem; font-weight: 500;">أتعاب إدارة التسويق والإعلانات والمجهودات المقدمة خلال شهر أكتوبر 2026</h3>
+                    <div class="financial-amount" class="num">7,500 EGP</div>
+                    <p style="color: var(--accent-light); font-size: 0.95rem;">المبلغ مستحق عن شهر أكتوبر 2026</p>
+                </div>
+            </section>
+
+            <!-- 15. FINAL SECTION -->
+            <section id="final-footer" class="section" style="margin-bottom: 2rem;">
+                <div class="card hero-card" style="text-align: center; padding: 3rem 1.5rem;">
+                    <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;">EVADO</h2>
+                    <div style="font-size: 1rem; letter-spacing: 2px; color: var(--accent-light); margin-bottom: 1.5rem;">OWN EVERY STEP</div>
+                    <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">October 2026 | Prepared by Marketing & Media Buying Team</div>
+                    <div style="font-style: italic; font-size: 1.1rem; color: #fff; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; max-width: 600px; margin: 0 auto;">
+                        Building stronger marketing performance. Driving better business results.
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Product Data Object Array
+        const productsData = [
+            { name: "adidas Eva AERO", units: 444, sales: 288600, winner: true },
+            { name: "Adidas Eva", units: 62, sales: 42780, winner: false },
+            { name: "Under Armour CORE EVA", units: 34, sales: 21420, winner: false },
+            { name: "Nike Zoom EVA", units: 18, sales: 12420, winner: false },
+            { name: "Nike Eva RUSH", units: 19, sales: 11970, winner: false },
+            { name: "PUMA Eva VOLT", units: 11, sales: 7370, winner: false },
+            { name: "O2X Eva", units: 9, sales: 6120, winner: false },
+            { name: "Zara Soft Sweatpants", units: 1, sales: 525, winner: false },
+            { name: "Tommy Hilfiger Shorts", units: 1, sales: 470, winner: false },
+            { name: "HILFIGER Stripe Tee", units: 1, sales: 450, winner: false }
+        ];
+
+        // Function to render product table dynamically
+        function renderProductTable(data) {
+            const tbody = document.getElementById('productTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                if (item.winner) {
+                    tr.classList.add('winner-row');
+                }
+                tr.innerHTML = `
+                    <td>${item.name} ${item.winner ? '<span class="badge">TOP SELLER</span>' : ''}</td>
+                    <td class="num">${item.units.toLocaleString('en-US')}</td>
+                    <td class="num">${item.sales.toLocaleString('en-US')} EGP</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Sorting Logic
+        document.getElementById('sortBySales')?.addEventListener('click', () => {
+            const sorted = [...productsData].sort((a, b) => b.sales - a.sales);
+            renderProductTable(sorted);
+        });
+
+        document.getElementById('sortByUnits')?.addEventListener('click', () => {
+            const sorted = [...productsData].sort((a, b) => b.units - a.units);
+            renderProductTable(sorted);
+        });
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-counter]');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-counter');
+                const duration = 1500;
+                const stepTime = 20;
+                const steps = duration / stepTime;
+                const increment = target / steps;
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target.toLocaleString('en-US');
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current).toLocaleString('en-US');
+                    }
+                }, stepTime);
+            });
+        }
+
+        // Section Observer & Animations
+        const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Update active nav link
+                    const id = entry.target.getAttribute('id');
+                    if (id) {
+                        document.querySelectorAll('.nav-item').forEach(item => {
+                            item.classList.remove('active');
+                            if (item.querySelector(`a[href="#${id}"]`)) {
+                                item.classList.add('active');
+                            }
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Mobile Nav Toggle
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        mobileNavBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !mobileNavBtn.contains(e.target) && sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+        // Scroll to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Initialize Charts on Window Load
+        window.onload = function() {
+            animateCounters();
+            renderProductTable(productsData);
+
+            // Growth Chart
+            const growthCtx = document.getElementById('growthChart').getContext('2d');
+            new Chart(growthCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Traffic Growth (+414%)', 'CR Growth (+1.9%)'],
+                    datasets: [{
+                        data: [414, 1.9],
+                        backgroundColor: ['#626B43', '#023b3c']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // Products Horizontal Bar Chart
+            const productsBarCtx = document.getElementById('productsBarChart').getContext('2d');
+            new Chart(productsBarCtx, {
+                type: 'bar',
+                indexAxis: 'y',
+                data: {
+                    labels: [
+                        'adidas Eva AERO',
+                        'Adidas Eva',
+                        'Under Armour CORE',
+                        'Nike Zoom EVA',
+                        'Nike Eva RUSH',
+                        'PUMA Eva VOLT',
+                        'O2X Eva',
+                        'Zara Soft',
+                        'Tommy Shorts',
+                        'HILFIGER Tee'
+                    ],
+                    datasets: [{
+                        label: 'إجمالي المبيعات (EGP)',
+                        data: [288600, 42780, 21420, 12420, 11970, 7370, 6120, 525, 470, 450],
+                        backgroundColor: '#626B43',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Products Donut Chart
+            const productsDonutCtx = document.getElementById('productsDonutChart').getContext('2d');
+            new Chart(productsDonutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['adidas Eva AERO', 'باقي المنتجات'],
+                    datasets: [{
+                        data: [288600, 103525],
+                        backgroundColor: ['#626B43', '#E9EDDF']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
